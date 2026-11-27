@@ -503,7 +503,9 @@ document.addEventListener("keyup",e=>{ if(e.shiftKey||e.key==="Shift") setTimeou
 window.addEventListener("blur",()=>{ down.clear(); document.querySelectorAll(".bk.real").forEach(b=>b.classList.remove("real")); paintMap(); });
 
 /* controls */
-$("scrOS").addEventListener("click",e=>{const t=e.target.closest(".tile"); if(!t) return; OS=t.dataset.os; buildKB(); topics();});
+const START={copy:0,game:1}[(q.get("t")||"").toLowerCase()];
+$("scrOS").addEventListener("click",e=>{const t=e.target.closest(".tile"); if(!t) return; OS=t.dataset.os; buildKB();
+  if(START!==undefined && SC<0 && !window.__started){ window.__started=true; SC=START; ST=0; pk=""; render(); } else topics();});
 $("toOS").addEventListener("click",()=>{ SC=-1; show("scrOS"); });
 $("topics").addEventListener("click",e=>{const t=e.target.closest(".tile"); if(!t) return; SC=+t.dataset.i; ST=0; pk=""; render();});
 $("toTopics").addEventListener("click",topics);
